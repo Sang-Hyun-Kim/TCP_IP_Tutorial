@@ -1,4 +1,4 @@
-
+﻿
 #include <stdio.h>
 #include <stdlib.h>
 #include <WinSock2.h>
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 		ErrorHandling("WSAStartup() error!");
 
 
-	hServSock = socket(PF_INET,SOCK_STREAM,0);
+	hServSock = socket(PF_INET, SOCK_STREAM, 0);
 	if (hServSock == INVALID_SOCKET)
 		ErrorHandling("socket() error!");
 
@@ -38,12 +38,12 @@ int main(int argc, char* argv[])
 		ErrorHandling("bind() error");
 	}
 
-	if(listen(hServSock,5) == SOCKET_ERROR)
+	if (listen(hServSock, 5) == SOCKET_ERROR)
 		ErrorHandling("listen() error");
 
 	szClntAddr = sizeof(clntAddr);
 	hClntSock = accept(hServSock, (SOCKADDR*)&clntAddr, &szClntAddr);
-	if(hClntSock==INVALID_SOCKET)
+	if (hClntSock == INVALID_SOCKET)
 		ErrorHandling("accept() error");
 
 	send(hClntSock, message, sizeof(message), 0);
