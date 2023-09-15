@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{51912f79-1bf3-4c7c-99a4-ccb9567d289b}</ProjectGuid>
-    <RootNamespace>TCPServer</RootNamespace>
+    <ProjectGuid>{683ae3f0-371e-4895-b61b-a34e5a68368b}</ProjectGuid>
+    <RootNamespace>EchoClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -137,7 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Echo_Server.cpp" />
+    <ClCompile Include="EchoClient.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
