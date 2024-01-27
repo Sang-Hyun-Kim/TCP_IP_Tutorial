@@ -11,7 +11,12 @@
 #define OPSZ 4
 #pragma warning(disable:4996)
 
-
+// 클라이언트는 서버에 접속하자마자 피연산자의 개수정보를 1바이트 정수형태로 전달
+// 클라이언트가 서버에 전달하는 정수하나는 4바이트로 표현한다.
+// 정수를 전달한다음에는 연산의 종류를 전달한다.
+// 문자 +,-,*,중 하나를선택해서 전달
+// 서버는 연산결과를 4바이트 정수의 형태로 클라이언트에게 전달
+// 연산결과를 얻은 클라이언트는 서버와의 연결을 종료한다.
 void ErrorHandling(const char* message);
 
 
@@ -22,7 +27,6 @@ int main(int argc, char* argv[])
 	SOCKET hSocket;
 	char opmsg[BUF_SIZE];
 	int result, opndCnt, i;
-	char resultmsg[4];
 	SOCKADDR_IN servAdr;
 
 	if (argc != 3)
@@ -63,24 +67,10 @@ int main(int argc, char* argv[])
 	fputs("Operator: ", stdout);
 	scanf("%c", &opmsg[opndCnt * OPSZ + 1]);
 	send(hSocket, opmsg, opndCnt * OPSZ + 2, 0);
-	recv(hSocket,  resultmsg, RLT_SIZE, 0);
-	
-	result = atoi(resultmsg);
-
-	// 변환 실패 처리
-	//recv(hSocket, resultmsg, RLT_SIZE, 0);
-	//char* endptr;
-	//result = strtol(resultmsg, &endptr, 10);
-
-	//if (*endptr != '\0') {
-	//	// 변환 실패 처리
-	//	ErrorHandling("Conversion error");
-	//}
+	recv(hSocket,  (char *)&result, RLT_SIZE, 0);
 
 	printf("Operation Result: %d\n", result);
 
-
-	printf("Operation Result: %d\n", result);
 	closesocket(hSocket);
 
 	WSACleanup();
