@@ -28,12 +28,11 @@ int main(int argc, char* argv[])
 	char opmsg[BUF_SIZE];
 	int result, opndCnt, i;
 	SOCKADDR_IN servAdr;
-
-	if (argc != 3)
-	{
-		printf("Usage : %s <IP> <port>\n", argv[0]);
-		exit(1);
-	}
+	//if (argc != 3)
+	//{
+	//	printf("Usage : %s <IP> <port>\n", argv[0]);
+	//	exit(1);
+	//}
 
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 		ErrorHandling("WSAStartup() error!");
@@ -45,8 +44,9 @@ int main(int argc, char* argv[])
 	memset(&servAdr, 0, sizeof(servAdr));
 	servAdr.sin_family = AF_INET;
 	//servAddr.sin_addr.s_addr = inet_addr(argv[1]);
-	inet_pton(AF_INET, argv[1], &(servAdr.sin_addr.s_addr));
-	servAdr.sin_port = htons(atoi(argv[2]));
+	inet_pton(AF_INET, "127.0.0.1", &(servAdr.sin_addr.s_addr));
+	/*servAdr.sin_port = htons(atoi(argv[2]));*/
+	servAdr.sin_port = htons(atoi("9190"));
 
 	if (connect(hSocket, (SOCKADDR*)&servAdr, sizeof(servAdr)) == SOCKET_ERROR)
 		ErrorHandling("connect() error");
